@@ -1,0 +1,373 @@
+/*!
+ * FlowAble — standalone accessibility toolbar
+ * Zero dependencies. Safe to extract into its own package as-is.
+ *
+ * Author: Passaro Francesco Paolo - https://www.digitalsolutions.it
+ *
+ * License: free to use for any business or personal purpose. You may not
+ * modify the source code or copy/redistribute it separately from this
+ * project. All rights reserved by the author.
+ */
+
+:root {
+  --flowable-accent: #4f46e5;
+  --flowable-accent-dark: #3730a3;
+  --flowable-ink: #1e2330;
+  --flowable-bg: #ffffff;
+  --flowable-border: #e5e7eb;
+  --flowable-radius: 14px;
+  --flowable-z-toggle: 10050;
+  --flowable-z-panel: 10049;
+  --flowable-shadow: 0 12px 40px rgba(20, 22, 31, .25);
+}
+
+/* ---------- Toggle button ---------- */
+.flowable-toggle {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: var(--flowable-accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: var(--flowable-z-toggle);
+  box-shadow: 0 8px 24px rgba(79, 70, 229, .45);
+  transition: transform .2s ease, background .2s ease;
+}
+.flowable-toggle:hover { background: var(--flowable-accent-dark); transform: scale(1.06); }
+.flowable-toggle:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.flowable-toggle svg { width: 28px; height: 28px; display: block; }
+.flowable-toggle.flowable-active { transform: rotate(90deg); }
+
+/* ---------- Panel ---------- */
+.flowable-panel {
+  position: fixed;
+  left: 24px;
+  bottom: 92px;
+  width: 380px;
+  max-width: calc(100vw - 32px);
+  max-height: min(720px, calc(100vh - 120px));
+  background: var(--flowable-bg);
+  color: var(--flowable-ink);
+  border-radius: var(--flowable-radius);
+  box-shadow: var(--flowable-shadow);
+  z-index: var(--flowable-z-panel);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  animation: flowable-slide-up .22s ease;
+}
+@keyframes flowable-slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.flowable-panel * { box-sizing: border-box; }
+
+.flowable-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 14px 16px;
+  background: var(--flowable-accent);
+  color: #fff;
+}
+.flowable-header .flowable-brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; }
+.flowable-header .flowable-brand svg { width: 22px; height: 22px; }
+.flowable-lang-switch { display: flex; gap: 4px; }
+.flowable-lang-switch button {
+  background: rgba(255,255,255,.18); border: none; color: #fff; border-radius: 6px;
+  padding: 4px 8px; font-size: 12px; font-weight: 700; cursor: pointer;
+}
+.flowable-lang-switch button.flowable-active-lang { background: #fff; color: var(--flowable-accent-dark); }
+.flowable-close {
+  background: rgba(255,255,255,.18); border: none; color: #fff; width: 28px; height: 28px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;
+}
+.flowable-close svg { width: 14px; height: 14px; }
+
+.flowable-body { overflow-y: auto; padding: 12px 14px 16px; flex: 1; }
+.flowable-section { margin-bottom: 16px; }
+.flowable-section-title {
+  font-size: 11px; text-transform: uppercase; letter-spacing: .06em; font-weight: 700;
+  color: #6b7280; margin: 0 0 8px 2px;
+}
+.flowable-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+.flowable-btn {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  background: #f4f4f6; border: 1px solid var(--flowable-border); border-radius: 10px;
+  padding: 10px 6px; cursor: pointer; text-align: center; color: var(--flowable-ink);
+  font-size: 12px; line-height: 1.25; min-height: 74px;
+}
+.flowable-btn svg { width: 20px; height: 20px; }
+.flowable-btn:hover { background: #ececf2; }
+.flowable-btn.flowable-on { background: var(--flowable-accent); color: #fff; border-color: var(--flowable-accent); }
+
+.flowable-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  background: #f4f4f6; border: 1px solid var(--flowable-border); border-radius: 10px;
+  padding: 8px 10px; margin-bottom: 8px;
+}
+.flowable-row .flowable-row-label { font-size: 13px; font-weight: 600; }
+.flowable-step-controls { display: flex; align-items: center; gap: 6px; }
+.flowable-step-controls button {
+  width: 26px; height: 26px; border-radius: 50%; border: none; background: var(--flowable-accent);
+  color: #fff; cursor: pointer; font-size: 15px; line-height: 1; display: flex; align-items: center; justify-content: center;
+}
+.flowable-step-controls .flowable-step-dots { display: flex; gap: 3px; }
+.flowable-step-controls .flowable-step-dots span { width: 6px; height: 6px; border-radius: 50%; background: #d1d5db; }
+.flowable-step-controls .flowable-step-dots span.flowable-dot-on { background: var(--flowable-accent); }
+
+.flowable-select {
+  width: 100%; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--flowable-border);
+  font-size: 13px; background: #fff; color: var(--flowable-ink);
+}
+
+.flowable-footer {
+  padding: 10px 16px; border-top: 1px solid var(--flowable-border); font-size: 11px; color: #6b7280;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+.flowable-footer .flowable-brand-mini { display: flex; align-items: center; gap: 6px; font-weight: 700; }
+.flowable-footer .flowable-brand-mini svg { width: 14px; height: 14px; color: var(--flowable-accent); }
+.flowable-footer a { color: var(--flowable-accent); text-decoration: none; }
+.flowable-footer-credit {
+  padding: 6px 16px 10px; font-size: 10px; color: #9ca3af; text-align: center;
+  border-top: 1px solid var(--flowable-border);
+}
+
+.flowable-reset {
+  width: 100%; padding: 10px; border-radius: 10px; border: 1px solid var(--flowable-border);
+  background: #fff; color: #b91c1c; font-weight: 700; cursor: pointer; font-size: 13px;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.flowable-reset:hover { background: #fef2f2; }
+.flowable-reset svg { width: 16px; height: 16px; flex: none; }
+
+.flowable-statement {
+  position: absolute; inset: 0; background: var(--flowable-bg); z-index: 2; display: none;
+  flex-direction: column; padding: 14px 16px; overflow-y: auto; font-size: 13px; line-height: 1.6;
+}
+.flowable-statement.flowable-open { display: flex; }
+.flowable-statement h3 { font-size: 15px; margin: 12px 0 6px; }
+.flowable-statement .flowable-back {
+  align-self: flex-start; background: none; border: none; color: var(--flowable-accent);
+  font-weight: 700; cursor: pointer; margin-bottom: 10px; padding: 0;
+}
+
+@media (max-width: 480px) {
+  .flowable-panel { right: 16px; left: 16px; width: auto; bottom: 88px; }
+  .flowable-toggle { left: 16px; bottom: 16px; }
+}
+
+/* ================================================================
+   STATE CLASSES — applied to <html> by flowable.js
+   ================================================================ */
+
+/* Font size steps. Root percentage scaling (works when the host CSS
+   is rem-based) plus an em-based bump on common text tags (not on
+   div/button/layout containers, to avoid disturbing em-based
+   padding/width in the host page's grid and breaking the layout). */
+html.flowable-font-1 { font-size: 112.5%; }
+html.flowable-font-2 { font-size: 125%; }
+html.flowable-font-3 { font-size: 137.5%; }
+
+html.flowable-font-1 p, html.flowable-font-1 li, html.flowable-font-1 span,
+html.flowable-font-1 a, html.flowable-font-1 h1, html.flowable-font-1 h2, html.flowable-font-1 h3,
+html.flowable-font-1 h4, html.flowable-font-1 h5, html.flowable-font-1 h6,
+html.flowable-font-1 td, html.flowable-font-1 th, html.flowable-font-1 label,
+html.flowable-font-1 blockquote, html.flowable-font-1 strong, html.flowable-font-1 em {
+  font-size: 1.125em;
+}
+html.flowable-font-2 p, html.flowable-font-2 li, html.flowable-font-2 span,
+html.flowable-font-2 a, html.flowable-font-2 h1, html.flowable-font-2 h2, html.flowable-font-2 h3,
+html.flowable-font-2 h4, html.flowable-font-2 h5, html.flowable-font-2 h6,
+html.flowable-font-2 td, html.flowable-font-2 th, html.flowable-font-2 label,
+html.flowable-font-2 blockquote, html.flowable-font-2 strong, html.flowable-font-2 em {
+  font-size: 1.25em;
+}
+html.flowable-font-3 p, html.flowable-font-3 li, html.flowable-font-3 span,
+html.flowable-font-3 a, html.flowable-font-3 h1, html.flowable-font-3 h2, html.flowable-font-3 h3,
+html.flowable-font-3 h4, html.flowable-font-3 h5, html.flowable-font-3 h6,
+html.flowable-font-3 td, html.flowable-font-3 th, html.flowable-font-3 label,
+html.flowable-font-3 blockquote, html.flowable-font-3 strong, html.flowable-font-3 em {
+  font-size: 1.375em;
+}
+
+/* Line height steps */
+html.flowable-line-1 body, html.flowable-line-1 p, html.flowable-line-1 li { line-height: 1.7 !important; }
+html.flowable-line-2 body, html.flowable-line-2 p, html.flowable-line-2 li { line-height: 2 !important; }
+html.flowable-line-3 body, html.flowable-line-3 p, html.flowable-line-3 li { line-height: 2.4 !important; }
+
+/* Letter spacing */
+html.flowable-letter-spacing body, html.flowable-letter-spacing p, html.flowable-letter-spacing li,
+html.flowable-letter-spacing h1, html.flowable-letter-spacing h2, html.flowable-letter-spacing h3,
+html.flowable-letter-spacing h4, html.flowable-letter-spacing h5, html.flowable-letter-spacing h6,
+html.flowable-letter-spacing a, html.flowable-letter-spacing span {
+  letter-spacing: .06em !important;
+}
+
+/* Bold weight */
+html.flowable-bold body, html.flowable-bold p, html.flowable-bold li, html.flowable-bold span,
+html.flowable-bold a { font-weight: 700 !important; }
+
+/* Readable font (widely available, high-legibility system stack) */
+html.flowable-readable-font body, html.flowable-readable-font p, html.flowable-readable-font li,
+html.flowable-readable-font span, html.flowable-readable-font a,
+html.flowable-readable-font h1, html.flowable-readable-font h2, html.flowable-readable-font h3,
+html.flowable-readable-font h4, html.flowable-readable-font h5, html.flowable-readable-font h6 {
+  font-family: Verdana, Tahoma, "Segoe UI", Arial, sans-serif !important;
+}
+
+/* Dyslexia-friendly mode: wider letter/word spacing + high-legibility font
+   (no custom webfont download needed — keeps the module dependency-free) */
+html.flowable-dyslexic-font body, html.flowable-dyslexic-font p, html.flowable-dyslexic-font li,
+html.flowable-dyslexic-font span, html.flowable-dyslexic-font a {
+  font-family: Verdana, Tahoma, Arial, sans-serif !important;
+  letter-spacing: .05em !important;
+  word-spacing: .12em !important;
+  line-height: 1.8 !important;
+}
+
+/* Highlight links / titles / all content */
+html.flowable-highlight-links a {
+  background: #fff59d !important; color: #000 !important; text-decoration: underline !important;
+  box-shadow: 0 0 0 2px #fff59d;
+}
+html.flowable-highlight-titles h1, html.flowable-highlight-titles h2, html.flowable-highlight-titles h3,
+html.flowable-highlight-titles h4, html.flowable-highlight-titles h5, html.flowable-highlight-titles h6 {
+  background: #fff59d !important; color: #000 !important; box-shadow: 0 0 0 2px #fff59d;
+}
+html.flowable-highlight-all p, html.flowable-highlight-all li, html.flowable-highlight-all span {
+  background: #fff9c4 !important; color: #000 !important;
+}
+
+/* Align text */
+html.flowable-align-left body, html.flowable-align-left p { text-align: left !important; }
+html.flowable-align-center body, html.flowable-align-center p { text-align: center !important; }
+html.flowable-align-right body, html.flowable-align-right p { text-align: right !important; }
+
+/* Big cursor */
+html.flowable-big-cursor, html.flowable-big-cursor * {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path d="M3 2l14 8-6 2-2 6z" fill="black" stroke="white" stroke-width="1.2"/></svg>') 4 4, auto !important;
+}
+
+/* Contrast modes */
+html.flowable-contrast-dark body { background: #0f1115 !important; color: #f3f4f6 !important; }
+html.flowable-contrast-dark a { color: #93c5fd !important; }
+html.flowable-contrast-light body { background: #ffffff !important; color: #111827 !important; filter: contrast(1.05); }
+html.flowable-contrast-high body { background: #000 !important; color: #fff !important; }
+html.flowable-contrast-high a { color: #ffff00 !important; }
+html.flowable-contrast-high img { filter: contrast(1.3) brightness(0.9); }
+
+/* Monochrome / saturation */
+html.flowable-monochrome body { filter: grayscale(1); }
+html.flowable-desaturate body { filter: saturate(.35); }
+html.flowable-monochrome.flowable-desaturate body { filter: grayscale(1) saturate(.35); }
+
+/* Stop animations */
+html.flowable-stop-animations *, html.flowable-stop-animations *::before, html.flowable-stop-animations *::after {
+  animation-play-state: paused !important;
+  animation-duration: 0s !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+/* Hide images */
+html.flowable-hide-images img, html.flowable-hide-images picture, html.flowable-hide-images svg.flowable-content-svg,
+html.flowable-hide-images video {
+  visibility: hidden !important;
+}
+
+/* Keyboard navigation: strong visible focus ring everywhere */
+html.flowable-keyboard-nav *:focus {
+  outline: 3px solid #4f46e5 !important;
+  outline-offset: 2px !important;
+}
+
+/* Reading line / mask overlays (positioned by JS via inline top/height) */
+.flowable-reading-line {
+  position: fixed; left: 0; right: 0; height: 32px; background: rgba(79, 70, 229, .12);
+  border-top: 2px solid var(--flowable-accent); border-bottom: 2px solid var(--flowable-accent);
+  pointer-events: none; z-index: 10040; display: none;
+}
+.flowable-reading-line.flowable-active { display: block; }
+
+.flowable-reading-mask-top, .flowable-reading-mask-bottom {
+  position: fixed; left: 0; right: 0; background: rgba(0, 0, 0, .72);
+  pointer-events: none; z-index: 10040; display: none;
+}
+.flowable-reading-mask-top.flowable-active, .flowable-reading-mask-bottom.flowable-active { display: block; }
+
+/* Text magnifier: enlarge element currently under the cursor */
+html.flowable-text-magnifier .flowable-magnified {
+  font-size: 1.6em !important;
+  line-height: 1.4 !important;
+  background: #fff59d;
+  color: #000;
+  position: relative;
+  z-index: 5;
+  outline: 2px solid var(--flowable-accent);
+}
+
+/* Screen-reader-only helper (used by the widget's own labels) */
+.flowable-sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* ---------- Virtual keyboard ----------
+   Docked next to the field it edits (positioned in JS via top/left),
+   not pinned to the viewport, so it never covers content the user
+   can't scroll to. */
+.flowable-kb {
+  position: fixed;
+  z-index: 10060;
+  width: 340px;
+  max-width: calc(100vw - 20px);
+  background: #1e2330;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, .35);
+  display: none;
+  font: 14px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+.flowable-kb.flowable-open { display: block; }
+.flowable-kb-row { display: flex; justify-content: center; gap: 4px; margin-bottom: 4px; }
+.flowable-kb-key {
+  flex: 1; max-width: 32px; min-width: 20px; height: 34px;
+  background: #333a4d; color: #fff; border: 1px solid #454d63; border-radius: 6px;
+  cursor: pointer; font-size: 13px; display: flex; align-items: center; justify-content: center;
+}
+.flowable-kb-key:hover { background: #454d63; }
+.flowable-kb-key.flowable-kb-wide { max-width: 56px; }
+.flowable-kb-key.flowable-kb-space { max-width: 220px; flex: 4; }
+.flowable-kb-key.flowable-kb-accent { background: var(--flowable-accent); border-color: var(--flowable-accent); }
+.flowable-kb-close {
+  position: absolute; top: -30px; right: 0; background: var(--flowable-accent); color: #fff;
+  border: none; border-radius: 8px 8px 0 0; padding: 5px 12px; cursor: pointer; font-size: 11px; font-weight: 700;
+}
+.flowable-kb-size {
+  position: absolute; top: -30px; right: 84px; background: #333a4d; color: #fff;
+  border: 1px solid #454d63; border-radius: 8px 8px 0 0; padding: 5px 12px; cursor: pointer;
+  font-size: 11px; font-weight: 700;
+}
+.flowable-kb-size.flowable-kb-size-on { background: var(--flowable-accent); border-color: var(--flowable-accent); }
+
+/* Larger keys: bigger touch/click targets for users with motor or
+   vision difficulties. Toggled independently from the panel's own
+   font-size setting — this only affects the on-screen keyboard. */
+.flowable-kb.flowable-kb-large { width: 420px; }
+.flowable-kb.flowable-kb-large .flowable-kb-key {
+  max-width: 42px; min-width: 30px; height: 46px; font-size: 17px;
+}
+.flowable-kb.flowable-kb-large .flowable-kb-key.flowable-kb-wide { max-width: 72px; }
+.flowable-kb.flowable-kb-large .flowable-kb-key.flowable-kb-space { max-width: 260px; }

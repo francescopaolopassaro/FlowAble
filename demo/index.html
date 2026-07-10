@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FlowAble — demo</title>
+<link rel="stylesheet" href="../src/flowable.css">
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; margin: 0; color: #1e2330; line-height: 1.6; }
+  header { background: #4f46e5; color: #fff; padding: 48px 24px; text-align: center; }
+  header h1 { margin: 0 0 8px; font-size: 2rem; }
+  header p { margin: 0; opacity: .9; }
+  main { max-width: 760px; margin: 0 auto; padding: 40px 24px 120px; }
+  h2 { margin-top: 2.5em; }
+  nav.demo-nav { display: flex; gap: 16px; justify-content: center; padding: 12px; background: #f4f4f6; }
+  nav.demo-nav a { color: #4f46e5; text-decoration: none; font-weight: 600; }
+  footer { text-align: center; padding: 24px; color: #6b7280; font-size: .9em; }
+  .card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px; margin: 16px 0; }
+  form.demo-form { display: grid; gap: 12px; max-width: 420px; }
+  form.demo-form label { font-weight: 600; font-size: .9em; }
+  form.demo-form input, form.demo-form select, form.demo-form textarea {
+    padding: 8px 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1em; width: 100%; box-sizing: border-box;
+  }
+  img.demo-img { max-width: 100%; border-radius: 10px; }
+  .hint { background: #fff9c4; border-left: 4px solid #f4d03f; padding: 12px 16px; border-radius: 6px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>FlowAble — live demo</h1>
+  <p>A standalone accessibility toolbar. Look for the floating button in the bottom-left corner.</p>
+</header>
+
+<nav class="demo-nav">
+  <a href="#content">Main content</a>
+  <a href="#form-section">Form</a>
+  <a href="#footer">Footer</a>
+</nav>
+
+<main id="content">
+  <p class="hint">Try the panel: adjust text size, switch to high contrast, turn on "Magnifier + word reading" and hover the links below, or enable "Virtual keyboard" and click into the form fields further down.</p>
+
+  <h2>What is FlowAble?</h2>
+  <p>FlowAble is a zero-dependency accessibility toolbar you can drop into any website. This page exists purely to demonstrate it — none of the styling above the footer belongs to FlowAble itself, it's just sample content: headings, paragraphs, links, an image, and a form.</p>
+
+  <p>Read more about the project on its <a href="https://github.com/francescopaolopassaro/FlowAble">GitHub repository</a>, or visit <a href="https://www.digitalsolutions.it">DigitalSolutions.it</a>, the agency behind it.</p>
+
+  <div class="card">
+    <img class="demo-img" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='720' height='240' viewBox='0 0 720 240'><rect width='720' height='240' fill='%234f46e5'/><circle cx='120' cy='120' r='60' fill='white' opacity='0.15'/><circle cx='600' cy='60' r='90' fill='white' opacity='0.1'/><text x='50%25' y='50%25' fill='white' font-size='28' font-family='sans-serif' text-anchor='middle' dominant-baseline='middle'>Sample image (try &quot;Hide images&quot;)</text></svg>" alt="Sample placeholder graphic used to demonstrate the Hide images feature">
+  </div>
+
+  <h2>Sample article</h2>
+  <p>The evolution of accessible design has moved from an afterthought to a first-class requirement. Screen readers, keyboard navigation, sufficient color contrast, and resizable text are no longer nice-to-haves — for a growing number of laws and standards (WCAG, EN 301 549, the EAA, the ADA) they are the baseline expectation.</p>
+  <ul>
+    <li>Hover over this list with <strong>Text magnifier</strong> enabled to see it enlarge.</li>
+    <li>Enable <strong>Magnifier + word reading</strong> and hover a link, like <a href="#content">this one</a>, to hear its full text read aloud.</li>
+    <li>Try <strong>Reading line</strong> or <strong>Reading mask</strong> while scrolling through this list.</li>
+  </ul>
+
+  <blockquote>"Accessibility is not a feature, it's a foundation." — a sentence you can test with the Magnifier + word reading feature.</blockquote>
+
+  <h2 id="form-section">Try the virtual keyboard</h2>
+  <p>Turn on <strong>Virtual keyboard</strong> from the panel's "Other" section, then click into any field below — the on-screen keyboard will appear right beneath it.</p>
+
+  <form class="demo-form" onsubmit="return false;">
+    <div>
+      <label for="demo-name">Name</label>
+      <input id="demo-name" type="text" placeholder="Type here...">
+    </div>
+    <div>
+      <label for="demo-email">Email</label>
+      <input id="demo-email" type="email" placeholder="you@example.com">
+    </div>
+    <div>
+      <label for="demo-country">Country</label>
+      <select id="demo-country">
+        <option>Italy</option>
+        <option>France</option>
+        <option>Germany</option>
+        <option>Spain</option>
+        <option>United Kingdom</option>
+        <option>United States</option>
+      </select>
+    </div>
+    <div>
+      <label for="demo-message">Message</label>
+      <textarea id="demo-message" rows="4" placeholder="Type a longer message..."></textarea>
+    </div>
+  </form>
+
+  <table border="0" cellpadding="8" style="width:100%; border-collapse: collapse; margin-top: 24px;">
+    <caption style="text-align:left; font-weight:700; margin-bottom:8px;">Sample table</caption>
+    <thead>
+      <tr style="background:#f4f4f6;"><th style="text-align:left;">Feature</th><th style="text-align:left;">Category</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Reading mask</td><td>Orientation & reading</td></tr>
+      <tr><td>High contrast</td><td>Color</td></tr>
+      <tr><td>Dyslexia font</td><td>Text</td></tr>
+    </tbody>
+  </table>
+</main>
+
+<footer id="footer">
+  <p>Demo page for <strong>FlowAble</strong> — developed by Passaro Francesco Paolo · <a href="https://www.digitalsolutions.it">DigitalSolutions.it</a></p>
+</footer>
+
+<script src="../src/flowable.js"></script>
+</body>
+</html>
