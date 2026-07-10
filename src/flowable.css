@@ -338,9 +338,13 @@ html.flowable-text-magnifier .flowable-magnified {
   padding: 10px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, .35);
   display: none;
+  overflow-y: auto;
   font: 14px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
-.flowable-kb.flowable-open { display: block; }
+/* Fixed heights (one per key size) so the keyboard never keeps
+   growing as rows are added — extra content scrolls instead. */
+.flowable-kb.flowable-open { display: block; height: 260px; }
+.flowable-kb.flowable-kb-large.flowable-open { height: 340px; }
 .flowable-kb-row { display: flex; justify-content: center; gap: 4px; margin-bottom: 4px; }
 .flowable-kb-key {
   flex: 1; max-width: 32px; min-width: 20px; height: 34px;

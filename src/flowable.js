@@ -890,7 +890,7 @@
   var kbShift = false;
   var kbTargetEl = null;
 
-  var KB_ROWS = ['1234567890', 'qwertyuiop', 'asdfghjkl', 'zxcvbnm'];
+  var KB_ROWS = ['1234567890', 'qwertyuiop', 'asdfghjkl', 'zxcvbnm', "@.,-_/:;!?'"];
 
   function isTypableField(el) {
     if (!el || el.disabled || el.readOnly) return false;
